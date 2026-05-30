@@ -35,7 +35,7 @@ public:
 
 	 
 	void setLastName(string lastName) {
-		_firstName = lastName;
+		_lastName = lastName;
 	}
 
 	string getLastName() {
