@@ -259,5 +259,9 @@ public:
 		return true;
 	}
 
+	static vector<clsBankClient> getClientsList() {
+		return _loadClientsDataFromFile();
+	}
+
 };
 
