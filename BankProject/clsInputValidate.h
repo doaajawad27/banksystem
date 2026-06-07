@@ -67,6 +67,39 @@ public:
 		return number;
 	}
 
+	static int readShortNumberInBetween(short from, short to, string errorMessage = "Number is not within range, Enter again:\n") {
+		short number;
+		number = readIntNumber();
+		while (!isNumberBetween(number, from, to)) {
+			cout << errorMessage << endl;
+			number = readIntNumber();
+		}
+		return number;
+	}
+
+
+	static float readFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		float Number;
+		while (!(cin >> Number)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage;
+		}
+		return Number;
+	}
+
+	//static float readFloatNumberBetween(double from, double to, string ErrorMessage = "Number is not within range, Enter again:\n")
+	//{
+	//	float number = readFloatNumber();
+
+	//	while (!isNumberBetween(number, from, to)) {
+	//		cout << errorMessage << endl;
+	//		number = readFloatNumber();
+	//	}
+	//	return number;
+	//}
+
 	static double readDblNumber(string errorMessage = "Invalid number, please enter a valid double number.") {
 		double number;
 		while (!(cin >> number)) {

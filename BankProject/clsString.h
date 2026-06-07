@@ -239,7 +239,7 @@ public:
 			str.erase(0, pos + delm.length());
 		}
 		if (str != "") {
-			vWords.push_back(word);
+			vWords.push_back(str); // push the remaining part, not the previous 'word'
 		}
 		return vWords;
 	}
