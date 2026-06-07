@@ -11,6 +11,7 @@
 #include"clsDeleteClientScreen.h"
 #include"clsUpdateClientScreen.h"
 #include"clsFindClientScreen.h"
+#include"clsShowTransactionsMenue.h"
 
 using namespace std;
 
@@ -54,7 +55,7 @@ class clsMainScreen:protected clsScreen
 	}
 
 	static void _showTransactoionMenue() {
-		cout << "transaction menue screen well be here\n";
+		clsShowTransactionsMenue::showTransactionsMenue();
 	}
 
 	static void _showManageUsersScreen() {

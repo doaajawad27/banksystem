@@ -282,8 +282,6 @@ public:
 
         case enMode::UpdateMode:
         {
-
-
             _update();
 
             return enSaveResults::svSucceeded;
@@ -369,6 +367,22 @@ public:
 
         return TotalBalances;
 
+    }
+
+    void deposit(float amount) {
+        _accountBalance += amount;
+        save();
+    }
+
+    bool whithdraw(float amount) {
+        if (_accountBalance < amount) {
+            return false;
+        }
+        else {
+            _accountBalance -= amount;
+            save();
+        }
+       
     }
 
 
