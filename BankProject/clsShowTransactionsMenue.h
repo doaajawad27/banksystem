@@ -8,6 +8,7 @@
 #include "clsMainScreen.h"
 #include"clsDepositScreen.h"
 #include"clsWithdrawScreen.h"
+#include"clsTotalBalancesScreen.h"
 
 using namespace std;
 
@@ -45,12 +46,11 @@ private:
 			break;
 		case enTransactionsMenueOption::eTotalBalances:
 			system("cls");
-			cout << "Total Balances screen well be here\n";
+			clsTotalBalancesScreen::showTotalBalances();
 			_goBackToTransactionsMenue();
 			break;
 		case enTransactionsMenueOption::eBackToMainMenue:
-			system("cls");
-		
+			//nothing here
 			break;
 		}
 	}
