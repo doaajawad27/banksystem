@@ -5,6 +5,10 @@
 #include "clsBankClient.h"
 #include <iomanip>
 #include "clsInputValidate.h"
+#include"clsUserListScreen.h"
+#include"claAddNewUserScreen.h"
+#include"clsDeleteUserScreen.h"
+#include"clsUpdateUserScreen.h"
 
 using namespace std;
 
@@ -15,7 +19,7 @@ private:
 
 	static enManageUsersMenueOptions readManageUsersOption() {
 		cout << setw(37) << "" << "please enter what do you want to do?[1-6]? ";
-		int option = clsInputValidate::readDblNumberInBetween(1, 5);
+		int option = clsInputValidate::readDblNumberInBetween(1, 6);
 		return enManageUsersMenueOptions(option);
 	}
 
@@ -28,19 +32,19 @@ private:
 	}
 
 	static void _showListUsersScreen() {
-		cout << "\nlist users will be here\n";
+		clsUserListScreen::showUsersList();
 	}
 
 	static void _showAddNewUserScreen() {
-		cout << "\nadd new user users will be here\n";
+		claAddNewUserScreen::showAddNewUser();
 	}
 
 	static void _showDeleteUserScreen() {
-		cout << "\ndelete user users will be here\n";
+		clsDeleteUserScreen::showDeleteUserScreen();
 	}
 
 	static void _showUpdateUserScreen() {
-		cout << "\nupdate user users will be here\n";
+		clsUpdateUserScreen::showUpdateUserScreen();
 	}
 
 	static void _showFindUserScreen() {
