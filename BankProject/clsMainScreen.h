@@ -13,11 +13,15 @@
 #include"clsFindClientScreen.h"
 #include"clsShowTransactionsMenue.h"
 #include"clsShowManageUsersMenue.h"
+#include"global.h"
+
 
 using namespace std;
 
 class clsMainScreen:protected clsScreen
 {
+
+
 	enum enMainMenuOption {eListClient=1,eAddNewClient=2,eDeleteClient=3
 							,eUpdateClient=4,eFindClient=5,eShowTransactionsMenue=6
 							,eManageUSers=7,eExit=8};
@@ -36,6 +40,7 @@ class clsMainScreen:protected clsScreen
 	}
 
 	static void _showAllClientsScreen() {
+
 		clsClientListScreen::showClientsList();
 	}
 
@@ -63,38 +68,44 @@ class clsMainScreen:protected clsScreen
 		clsShowManageUsersMenue::showManageUsersMenue();
 
 	}
-	static void _showExitScreen() {
-		cout << "exit screen well be here\n";
+	static void _showExitScreen() { 
+		currentUser = clsUser::find("", "");
 	}
 
 	static void _performMainMenuOption(enMainMenuOption option) {
 		
 		switch (option) {
+
 			case enMainMenuOption::eListClient:
 				system("cls");
 				_showAllClientsScreen();
 				_goBackToMainMenue();
 				break;
+
 			case enMainMenuOption::eAddNewClient:
 				system("cls");
 				_showAddNewClientsScreen();
 				_goBackToMainMenue();
 				break;
+
 			case enMainMenuOption::eDeleteClient:
 				system("cls");
 				_showDeleteClientScreen();
 				_goBackToMainMenue();
 				break;
+
 			case enMainMenuOption::eUpdateClient:
 				system("cls");
 				_showUpdateClientScreen();
 				_goBackToMainMenue();
 				break;
+
 			case enMainMenuOption::eFindClient:
 				system("cls");
 				_showFindClientScreen();
 				_goBackToMainMenue();
 				break;
+
 			case enMainMenuOption::eShowTransactionsMenue:
 				system("cls");
 				_showTransactoionMenue();
@@ -105,10 +116,10 @@ class clsMainScreen:protected clsScreen
 				_showManageUsersScreen();
 				_goBackToMainMenue();
 				break;
+
 			case enMainMenuOption::eExit:
 				system("cls");
 				_showExitScreen();
-				_goBackToMainMenue();
 				break;
 		}
 	}

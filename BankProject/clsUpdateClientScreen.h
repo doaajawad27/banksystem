@@ -54,6 +54,9 @@ public:
 
     static void showUpdateClientScreen()
     {
+        if (!_checkAcessRights(clsUser::pUpdateClient)) {
+            return;
+        }
 
         _DrawScreenHeader("\tUpdate Client Screen");
 

@@ -132,6 +132,13 @@ public:
 		_permissions = permissions;
 	}
 
+	bool  checkUserPermissions(enPermissions permissions) {
+		if (this->permissions == enPermissions::eAll || (this->permissions & permissions) == permissions)
+			return true;
+		else
+			return false;
+	}
+
 	bool isEmpty() {
 		return _mode == enMode::EmptyMode;
 	}

@@ -1,5 +1,7 @@
 #pragma once
 #include<iostream>
+#include"global.h"
+#include"clsUser.h"
 
 using namespace std;
 class clsScreen
@@ -12,6 +14,21 @@ protected:
 			cout << "\n\t\t\t\t\t " << subTitle;
 		cout << "\n\t\t\t\t\t--------------------------------------------------------\n\n";
 
+	}
+
+	static bool _checkAcessRights(clsUser::enPermissions permissions) {
+
+		if (currentUser.checkUserPermissions(permissions)) {
+			return true;
+		}
+
+		else {
+			cout << "\t\t\t\t--------------------------------------------------------------------------------\n";
+			cout << "\n\t\t\t\tYou don't have the permissions to do this action,contact your administrator :-(\n";
+			cout << "\n\t\t\t\t--------------------------------------------------------------------------------\n";
+			return false;
+		}
+	
 	}
 };
 

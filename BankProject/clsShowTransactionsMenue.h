@@ -57,7 +57,14 @@ private:
 public:
 	static void showTransactionsMenue()
 	{
+
+
 		system("cls");
+
+		// If user does NOT have Transactions permission, show message and return.
+		if (!_checkAcessRights(clsUser::enPermissions::pTransactions)) {
+			return;
+		}
 
 		_DrawScreenHeader("\t\tTransactions  Screen");
 
