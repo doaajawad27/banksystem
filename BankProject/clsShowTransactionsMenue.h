@@ -62,7 +62,7 @@ public:
 		system("cls");
 
 		// If user does NOT have Transactions permission, show message and return.
-		if (!_checkAcessRights(clsUser::enPermissions::pTransactions)) {
+		if (!_checkAcessRights(clsUser::enPermissions::pTransactions)) { 
 			return;
 		}
 

@@ -2,6 +2,8 @@
 #include<iostream>
 #include"global.h"
 #include"clsUser.h"
+#include"clsDate.h"
+
 
 using namespace std;
 class clsScreen
@@ -12,7 +14,9 @@ protected:
 		cout << "\n\t\t\t\t\t " << title;
 		if (subTitle != "")
 			cout << "\n\t\t\t\t\t " << subTitle;
-		cout << "\n\t\t\t\t\t--------------------------------------------------------\n\n";
+		cout << "\n\t\t\t\t\t--------------------------------------------------------\n";
+		cout << "\n\t\t\t\t\t" << "User: " << currentUser.username;
+		cout << "\n\t\t\t\t\t" << "Date: " << clsDate::dateToString(clsDate::GetSystemDate())<<"\n\n";
 
 	}
 
