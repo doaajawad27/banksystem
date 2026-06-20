@@ -120,6 +120,7 @@ class clsMainScreen:protected clsScreen
 			case enMainMenuOption::eExit:
 				system("cls");
 				_showExitScreen();
+				counter = 0;
 				break;
 		}
 	}

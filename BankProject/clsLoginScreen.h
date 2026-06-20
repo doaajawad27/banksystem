@@ -15,16 +15,29 @@ class clsLoginScreen:clsScreen
 {
 
 private:
-	static void _login() {
+
+	static bool _login() {
 
 		string username;
 		string password;
 		bool loginFaild = false;
 
+		short faildLoginCount = 0;
+		
 		do {
 
+
 			if (loginFaild) {
+				faildLoginCount++;
+
 				cout << "\nUsername or password is wrong, try again.\n";
+				cout << "you have " << (3 - faildLoginCount) << " trials to login.\n";
+				
+			}
+
+			if (faildLoginCount == 3) {
+				cout << "\nyour are locked after 3 faild trails.\n\n";
+				return false;
 			}
 
 			cout << "\nEnter username: ";
@@ -41,16 +54,19 @@ private:
 		} while (loginFaild);
 
 		clsMainScreen::showMainMenu();
+		return true;
 
 	}
 
 
 public:
 	
-	static void showLoginScreen() {
+	static bool showLoginScreen() {
 		system("cls");
 		_DrawScreenHeader("\tLoginScreen");
-		_login();
+
+		return _login();
+
 	}
 };
 
