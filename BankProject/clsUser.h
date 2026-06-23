@@ -6,6 +6,7 @@
 #include<vector>
 #include"clsString.h"
 #include<fstream>
+#include"clsDate.h"
 
 class clsUser:public clsPerson
 {
@@ -117,7 +118,18 @@ private:
 		}
 	}
 
+	string _prepareLoginRecord(string sep="#//#") {
+		string record = "";
+		record += clsDate::getSystemDateTimeString() + sep;
+		record += username + sep;
+		record += password + sep;
+		record += to_string(permissions);
+  
+		return record;
+	}
+
 public:
+
 
 	enum enPermissions{eAll=-1,pListClients=1,pAddNewClient=2,pDeleteClient=4,pUpdateClient=8,pFindClient=16
 		,pTransactions=32,pManageUSers=64};
@@ -289,5 +301,14 @@ public:
 		return _loadUsersDataFromFile();
 	}
 
+	void registerLogin() {
+		fstream file;
+		file.open("LoginRegister.txt", ios::out | ios::app);
+		if (file.is_open())
+		{
+			file << _prepareLoginRecord() << endl;
+			file.close();
+		}
+	}
 };
 

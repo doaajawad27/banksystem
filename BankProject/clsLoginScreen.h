@@ -53,6 +53,7 @@ private:
 
 		} while (loginFaild);
 
+		currentUser.registerLogin();
 		clsMainScreen::showMainMenu();
 		return true;
 
