@@ -8,17 +8,35 @@
 #include<fstream>
 #include"clsDate.h"
 
-class clsUser:public clsPerson
+class clsUser :public clsPerson
 {
+
 private:
 
-	enum enMode { EmptyMode = 0, UpdateMode = 1,AddNewMode = 2};
+
+	enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
 	enMode _mode;
 	string _username;
 	string _password;
+
 	int _permissions;
 
 	bool _markForDelete = false;
+
+	struct stLoginRegisterRecord;
+	static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Seperator = "#//#")
+	{
+		stLoginRegisterRecord LoginRegisterRecord;
+		vector <string> LoginRegisterDataLine;
+		LoginRegisterDataLine = clsString::split(Line, "#//#");
+
+		LoginRegisterRecord.dateTime = LoginRegisterDataLine[0];
+		LoginRegisterRecord.userName = LoginRegisterDataLine[1];
+		LoginRegisterRecord.password = LoginRegisterDataLine[2];
+		LoginRegisterRecord.permissions = stoi(LoginRegisterDataLine[3]);
+		return LoginRegisterRecord;
+    }
+
 
 	static clsUser _convertLinetoUserObject(string Line, string Seperator = "#//#")
 	{
@@ -51,9 +69,6 @@ private:
 		return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
 	}
 
-	static void _saveUsersDataToFile() {
-
-	}
 
 	void _addDataLineToFile(string line) {
 		fstream myfile;
@@ -130,9 +145,17 @@ private:
 
 public:
 
+	struct stLoginRegisterRecord {
+		string dateTime;
+		string userName;
+		string password;
+		int permissions;
+	};
+
 
 	enum enPermissions{eAll=-1,pListClients=1,pAddNewClient=2,pDeleteClient=4,pUpdateClient=8,pFindClient=16
-		,pTransactions=32,pManageUSers=64};
+		,pTransactions=32,pManageUSers=64,pLoginRegister=128};
+
 
 
 	clsUser(enMode mode, string firstName, string lastName,
@@ -299,6 +322,37 @@ public:
 	static vector <clsUser> getUsersList()
 	{
 		return _loadUsersDataFromFile();
+	}
+
+	static  vector <stLoginRegisterRecord> getLoginRegisterList()
+	{
+		vector <stLoginRegisterRecord> vLoginRegisterRecord;
+
+		fstream MyFile;
+		MyFile.open("LoginRegister.txt", ios::in);//read Mode
+
+		if (MyFile.is_open())
+		{
+
+			string Line;
+
+			stLoginRegisterRecord stLoginReg;
+			
+			while (getline(MyFile, Line))
+			{
+
+				stLoginRegisterRecord stLoginReg =_ConvertLoginRegisterLineToRecord(Line);
+
+				vLoginRegisterRecord.push_back(stLoginReg);
+
+			}
+
+			MyFile.close();
+
+		}
+
+		return vLoginRegisterRecord;
+
 	}
 
 	void registerLogin() {

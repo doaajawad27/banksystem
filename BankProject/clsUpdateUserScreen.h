@@ -95,6 +95,11 @@ private:
 		if (toupper(answer) == 'Y')
 			permissions += clsUser::enPermissions::pManageUSers;
 
+		cout << "\nLogin Register ? ";
+		cin >> answer;
+		if (toupper(answer) == 'Y')
+			permissions += clsUser::enPermissions::pLoginRegister;
+
 		return permissions;
 	}
 
