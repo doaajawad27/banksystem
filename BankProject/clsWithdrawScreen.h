@@ -59,7 +59,7 @@ public:
 
         if (toupper(answer) == 'Y') {
 
-            if (client.whithdraw(amount))
+            if (client.withdraw(amount))
             { 
                 cout << "\nAmmount withdraw sucssefully.\n ";
                 cout << "\nNew Balance is: " << client.accountBalance;

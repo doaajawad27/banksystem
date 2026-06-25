@@ -16,59 +16,50 @@ private:
 		cout << "\n-----------------------\n"; 
 	}
 
+	static string _readAccountNumber(string message) {
+		string accountNumber;
+		cout << "\n" << message << endl;
+		accountNumber = clsInputValidate::readString();
+		while (!clsBankClient::isClientExist(accountNumber)) {
+			cout << "\nAccount Number is not exist, Please Enter  another Account Number : ";
+			accountNumber = clsInputValidate::readString();
+		}
+		return accountNumber;
+	}
+
 public:
 	static void showTransferScreen() {
 		_DrawScreenHeader("\t Transfer Screen");
-		string accountNumberFrom;
-		cout << "\nPlease Enter Account Number to transfer from: ";
-		accountNumberFrom = clsInputValidate::readString();
-
-		while (!clsBankClient::isClientExist(accountNumberFrom)) {
-			cout << "\nAccount Number is not exist, Please Enter  another Account Number to transfer from: ";
-			accountNumberFrom = clsInputValidate::readString();
-		}
-
-		clsBankClient clientFrom = clsBankClient::find(accountNumberFrom);
-
+		
+		clsBankClient clientFrom = clsBankClient::find(_readAccountNumber("Please Enter Account Number to transfer from: "));
 		_printAccountInfo(clientFrom);
 
-		string accountNumberTo;
 
-		cout << "\n\nPlease Enter Account Number to transfer to: ";
-		accountNumberTo = clsInputValidate::readString();
-		while (!clsBankClient::isClientExist(accountNumberTo)) {
-			cout << "\nAccount Number is not exist, Please Enter  another Account Number to transfer to: ";
-			accountNumberTo = clsInputValidate::readString();
-		}
-
-		clsBankClient clientTo = clsBankClient::find(accountNumberTo);
+		clsBankClient clientTo = clsBankClient::find(_readAccountNumber("\nPlease Enter Account Number to transfer to: "));
 		_printAccountInfo(clientTo);
 
-		double transferAmount;
-		cout << "Enter the amount you want to transfer?";
-		transferAmount = clsInputValidate::readDblNumber();
+		
+		cout << "Enter the amount you want to transfer? ";
+		double transferAmount = clsInputValidate::readDblNumber();
 
 		char answer;
 		cout << "\nAre you sure you want to perform this transaction?(y/n)\n";
 		cin >> answer;
 
 		if (toupper(answer) == 'Y') {
-			if (clientFrom.accountBalance < transferAmount) {
-				cout << "\n\ncant transfer amount because account balance less than amount!!!\n";
-			}
-			else {
-				clientFrom.whithdraw(transferAmount);
-				clientTo.deposit(transferAmount);
+			if (clientFrom.transfer(transferAmount, clientTo)) {
+				cout << "\ntransfer done sucessfully.\n";
 				_printAccountInfo(clientFrom);
 				_printAccountInfo(clientTo);
+			}
+			else {
+				cout << "\nsorry, cant transfer amount not enogth.\n";
 			}
 			
 		}
 		else {
 			cout << "operation was cancelled!!\n";
 		}
-
-		
 
 	}
 };

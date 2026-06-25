@@ -374,7 +374,7 @@ public:
         save();
     }
 
-    bool whithdraw(float amount) {
+    bool withdraw(float amount) {
         if (_accountBalance < amount) {
             return false;
         }
@@ -385,6 +385,16 @@ public:
        
     }
 
+    bool transfer(float amount, clsBankClient& destinationClient)
+    {
+        if (amount > accountBalance) {
+            return false;
+        }
+
+        withdraw(amount);
+        destinationClient.deposit(amount);
+        return true;
+    }
 
 };
 
