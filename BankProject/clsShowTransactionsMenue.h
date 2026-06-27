@@ -9,6 +9,7 @@
 #include"clsWithdrawScreen.h"
 #include"clsTotalBalancesScreen.h"
 #include"clsTransferScreen.h"
+#include"clsTransferLogScreen.h"
 
 using namespace std;
 
@@ -17,12 +18,12 @@ class clsShowTransactionsMenue :protected clsScreen
 private:
 
 	enum enTransactionsMenueOption { eDeposit = 1, eWithdraw = 2, eTotalBalances = 3, 
-		etransfer=4,eBackToMainMenue = 5 };
+		etransfer=4,eTransferLogList=5,eBackToMainMenue = 6 };
 
 	static enTransactionsMenueOption _readTransactionsMenueOption() {
 		short option;
-		cout << setw(37) << "" << "Choose what do you want to do? [1-5]? ";
-		option = clsInputValidate::readShortNumberInBetween(1, 5);
+		cout << setw(37) << "" << "Choose what do you want to do? [1-6]? ";
+		option = clsInputValidate::readShortNumberInBetween(1, 6);
 		return enTransactionsMenueOption(option);
 	}
 
@@ -52,7 +53,14 @@ private:
 			break;
 		case enTransactionsMenueOption::etransfer:
 			system("cls");
-			clsTransferScreen::showTransferScreen();                            
+			clsTransferScreen::showTransferScreen();
+			break;
+
+		case enTransactionsMenueOption::eTransferLogList:
+			system("cls");
+			clsTransferLogScreen::showTransferLogScreen();
+			break;
+
 		case enTransactionsMenueOption::eBackToMainMenue:
 			//nothing here
 			break;
@@ -77,11 +85,12 @@ public:
 		cout << setw(37) <<""<<left << "\t\t\t\tTransactions Menue \n";
 		cout << setw(37) <<""<<left<< "=======================================================\n";
 
-		cout << setw(37) <<""<<left<< "\t[1] Deposit.\n";
+		cout << setw(37) << ""<<left<< "\t[1] Deposit.\n";
 		cout << setw(37) << ""<<left<< "\t[2] Withdraw.\n";
 		cout << setw(37) << ""<<left<< "\t[3] Total Balances.\n";
-		cout << setw(37) << "" <<left<<"\t[4] Transfer.\n";
-		cout << setw(37) << ""<<left<< "\t[5] Back To Main Menue.\n";
+		cout << setw(37) << ""<<left<<"\t[4] Transfer.\n";
+		cout << setw(37) << ""<<left<<"\t[5] Transfer Log.\n";
+		cout << setw(37) << ""<<left<< "\t[6] Back To Main Menue.\n";
 
 		cout << setw(37) <<""<<left << "=======================================================\n";
 

@@ -32,6 +32,22 @@ private:
         return Client;
     }
 
+    struct stTransferLog;
+
+    static stTransferLog _convertLineToTransterStruct(string line,string sep="#//#") {
+        vector<string> vTransfer = clsString::split(line, sep);
+        stTransferLog sTransfer;
+        sTransfer.dateTime = vTransfer[0];
+        sTransfer.sAccountNum = vTransfer[1];
+        sTransfer.dAccountNum = vTransfer[2];
+        sTransfer.amount = stoi(vTransfer[3]);
+        sTransfer.sBalance = stoi(vTransfer[4]);
+        sTransfer.dBalance = stoi(vTransfer[5]);
+        sTransfer.username = vTransfer[6];
+
+        return sTransfer;
+    }
+
     
     static string _converClientObjectToLine(clsBankClient Client, string Seperator = "#//#")
     {
@@ -153,8 +169,32 @@ private:
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+
+    string _transferRegisterToOneLine(float amount, clsBankClient& destClient, string username,string sep="#//#") {
+      
+        string line = "";
+        line += clsDate::getSystemDateTimeString() + sep;
+        line += _accountNumber + sep;
+        line += destClient.getAccountNumber() + sep;
+        line += to_string(amount) + sep;
+        line += to_string(accountBalance) + sep;
+        line += to_string(destClient.accountBalance) + sep;
+        line += username;
+
+       return line;
+    }
+
 public:
 
+    struct stTransferLog {
+        string dateTime;
+        string sAccountNum;
+        string dAccountNum;
+        string username;
+        float sBalance;
+        float dBalance;
+        float amount;
+    };
 
     clsBankClient(enMode Mode, string FirstName, string LastName,
         string Email, string Phone, string AccountNumber, string PinCode,
@@ -394,6 +434,38 @@ public:
         withdraw(amount);
         destinationClient.deposit(amount);
         return true;
+    }
+
+    void transferRegister(float amount,clsBankClient& destnationClient,string username){
+        string line=_transferRegisterToOneLine(amount, destnationClient, username);
+        fstream myFile;
+        myFile.open("TransferLog.txt", ios::out | ios::app);
+
+        if (myFile.is_open()) {
+            myFile << line<<endl;
+            myFile.close();
+        }
+
+    }
+
+    static vector<stTransferLog> getTransferLogList() {
+        vector< stTransferLog> transferList;
+        
+        fstream myFile;
+        myFile.open("TransferLog.txt", ios::in);//read mode
+
+        string line;
+
+        if (myFile.is_open()) {
+           
+            while (getline(myFile, line)) {
+                stTransferLog transferLogRecord = _convertLineToTransterStruct(line);
+                transferList.push_back(transferLogRecord);
+            }
+
+            myFile.close();
+        }
+        return transferList;
     }
 
 };

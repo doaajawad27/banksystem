@@ -51,6 +51,7 @@ public:
 				cout << "\ntransfer done sucessfully.\n";
 				_printAccountInfo(clientFrom);
 				_printAccountInfo(clientTo);
+				clientFrom.transferRegister(transferAmount, clientTo, currentUser.username);
 			}
 			else {
 				cout << "\nsorry, cant transfer amount not enogth.\n";
