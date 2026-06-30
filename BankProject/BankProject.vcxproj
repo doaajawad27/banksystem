@@ -168,6 +168,7 @@
     <ClInclude Include="clsUpdateUserScreen.h" />
     <ClInclude Include="clsUser.h" />
     <ClInclude Include="clsUserListScreen.h" />
+    <ClInclude Include="clsUtil.h" />
     <ClInclude Include="clsWithdrawScreen.h" />
     <ClInclude Include="global.h" />
   </ItemGroup>

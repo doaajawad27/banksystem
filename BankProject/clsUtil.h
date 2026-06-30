@@ -281,7 +281,23 @@ public:
 
     }
 
+    static string encryptTixt(string text, short key=2) {
+        for (int i = 0; i < text.length(); i++)
+        {
+            text[i] = char((int)text[i] + key);
+        }
+        return text;
+    }
+
+    static string decryptTixt(string text, short key=2) {
+        for (int i = 0; i < text.length(); i++)
+        {
+            text[i] = char((int)text[i] - key);
+        }
+        return text;
+    }
+
+
 
 
 };
-

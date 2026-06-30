@@ -7,6 +7,7 @@
 #include"clsString.h"
 #include<fstream>
 #include"clsDate.h"
+#include"clsUtil.h"
 
 class clsUser :public clsPerson
 {
@@ -32,7 +33,7 @@ private:
 
 		LoginRegisterRecord.dateTime = LoginRegisterDataLine[0];
 		LoginRegisterRecord.userName = LoginRegisterDataLine[1];
-		LoginRegisterRecord.password = LoginRegisterDataLine[2];
+		LoginRegisterRecord.password = clsUtil::decryptTixt(LoginRegisterDataLine[2]);
 		LoginRegisterRecord.permissions = stoi(LoginRegisterDataLine[3]);
 		return LoginRegisterRecord;
     }
@@ -44,7 +45,7 @@ private:
 		vUserData = clsString::split(Line, Seperator);
 
 		return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-			vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+			vUserData[3], vUserData[4],clsUtil::decryptTixt(vUserData[5]), stoi(vUserData[6]));
 
 	}
 
@@ -57,7 +58,7 @@ private:
 		userRecord += user.email + seperator;
 		userRecord += user.phone + seperator;
 		userRecord += user.username + seperator;
-		userRecord += user.password + seperator;
+		userRecord += clsUtil::encryptTixt(user.password) + seperator;
 		userRecord += to_string(user.permissions);
 
 		return userRecord;
@@ -137,7 +138,7 @@ private:
 		string record = "";
 		record += clsDate::getSystemDateTimeString() + sep;
 		record += username + sep;
-		record += password + sep;
+		record += clsUtil::encryptTixt(password) + sep;
 		record += to_string(permissions);
   
 		return record;
