@@ -2,6 +2,7 @@
 #include"clsScreen.h"
 #include<iostream>
 #include<iomanip>
+#include"clsCurrenciesListScreen.h"
 
 using namespace std;
 
@@ -32,8 +33,7 @@ private:
 		switch (option) {
 		case enCurrencyExchangeOption::eListCurrencies:
 			system("cls");
-			cout << "\nwe well handel this option later\n";
-			cout << "List Currencys\n";
+			clsCurrenciesListScreen::showCurrenciesListScreen();
 			_goBackToCurrencyExchangeMenue();
 			break;
 
