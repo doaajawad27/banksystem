@@ -21,13 +21,13 @@ class clsCurrenciesListScreen:protected clsScreen
       
     }
 
-       
+ 
 
 public:
 
     static void showCurrenciesListScreen() {
 
-        //if (!_checkAcessRights(clsUser::enPermissions::pListClients)) {
+       //if (!_checkAcessRights(clsUser::enPermissions::pListClients)) {
        //    return;
        //}
 

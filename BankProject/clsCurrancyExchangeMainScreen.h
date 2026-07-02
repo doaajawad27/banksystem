@@ -3,11 +3,13 @@
 #include<iostream>
 #include<iomanip>
 #include"clsCurrenciesListScreen.h"
+#include"clsFindCurrenciesScreen.h"
 
 using namespace std;
 
 class clsCurrancyExchangeMainScreen:protected clsScreen
 {
+
 private:
 
 	enum enCurrencyExchangeOption {
@@ -39,8 +41,7 @@ private:
 
 		case enCurrencyExchangeOption::eFindCurrency:
 			system("cls");
-			cout << "\nwe well handel this option later\n";
-			cout << "Find Currency\n";
+			clsFindCurrenciesScreen::showFindScreen();
 			_goBackToCurrencyExchangeMenue();
 			break;
 
@@ -65,6 +66,7 @@ private:
 
 		}
 	}
+
 public:
 	static void showCurrancyExchangeMainMenue() {
 
