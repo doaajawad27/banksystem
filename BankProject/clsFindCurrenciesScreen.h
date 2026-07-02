@@ -25,6 +25,17 @@ private:
 
 	}
 
+	static void _showResult(clsCurrency currency) {
+		if (!currency.isEmpty()) {
+			cout << "\nCurrency Found :-)\n";
+			_printCurrencyCard(currency);
+		}
+		else {
+			cout << "\nSorry, Currency is not found!! \n";
+		}
+	}
+
+
 	static enSearchBy _readFindCurrencyOption() {
 		cout << "\nFind By: [1] Code or [2] Country ? ";
 		short option = clsInputValidate::readShortNumberInBetween(1, 2);
@@ -32,33 +43,24 @@ private:
 	}
 
 	static void searchCurrencyByCode() {
+
 		cout << "\nPlease Enter CurrencyCode: ";
 		string currencyCode = clsInputValidate::readString();
 
 		clsCurrency currency= clsCurrency::findByCode(currencyCode);
 
-		if (currency.isCurrencyExist(currencyCode)) {
-			cout << "\nCurrency Found :-)\n";
-			_printCurrencyCard(currency);
-		}
-		else {
-			cout << "\nSorry, Currency is not found!! \n";
-		}
+		_showResult(currency);
 
 	}
 
 	static void searchCurrencyByCountry() {
+
 		cout << "\nPlease Enter country name: ";
 		string countryName = clsInputValidate::readString();
+
 		clsCurrency currency = clsCurrency::findByCountry(countryName);
 
-		if (currency.isCurrencyExist(currency.getCurrencyCode())) {
-			cout << "\nCurrency Found :-)\n";
-			_printCurrencyCard(currency);
-		}
-		else {
-			cout << "\nSorry, Currency is not found!! \n";
-		}
+		_showResult(currency);
 
 	}
 
