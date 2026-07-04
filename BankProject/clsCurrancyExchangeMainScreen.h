@@ -4,6 +4,7 @@
 #include<iomanip>
 #include"clsCurrenciesListScreen.h"
 #include"clsFindCurrenciesScreen.h"
+#include"clsUpdateCurrencyScreen.h"
 
 using namespace std;
 
@@ -47,8 +48,7 @@ private:
 
 		case enCurrencyExchangeOption::eUpdateRate:
 			system("cls");
-			cout << "\nwe well handel this option later\n";
-			cout << "update rate\n";
+			clsUpdateCurrencyScreen::showUpdateCurrencyScreen();
 			_goBackToCurrencyExchangeMenue();
 			break;
 
