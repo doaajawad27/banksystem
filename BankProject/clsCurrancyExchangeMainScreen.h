@@ -5,6 +5,7 @@
 #include"clsCurrenciesListScreen.h"
 #include"clsFindCurrenciesScreen.h"
 #include"clsUpdateCurrencyScreen.h"
+#include"clsCurrencyCalculator.h"
 
 using namespace std;
 
@@ -54,8 +55,7 @@ private:
 
 		case enCurrencyExchangeOption::eCurrencyCalculator:
 			system("cls");
-			cout << "\nwe well handel this option later\n";
-			cout << "Currency calculator\n";
+			clsCurrencyCalculator::showCalculatorScreen();
 			_goBackToCurrencyExchangeMenue();
 			break;
 

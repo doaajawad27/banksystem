@@ -170,5 +170,20 @@ public:
 		return _loadCurrencysDataFromFile();
 	}
 
+	float convertToUsd(float amount) {
+		return (float) amount / _rate;
+	}
+
+	float convertToOtherCurrency(float amount, clsCurrency otherCurrency) {
+
+		float amountInUsd = convertToUsd(amount);
+		if (otherCurrency.getCurrencyCode() == "USD") {
+			return amountInUsd;
+		}
+		
+		return (float)convertToUsd(amount) * otherCurrency.getRate();
+	}
+
+
 };
 

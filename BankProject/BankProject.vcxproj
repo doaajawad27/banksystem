@@ -149,6 +149,7 @@
     <ClInclude Include="clsCurrancyExchangeMainScreen.h" />
     <ClInclude Include="clsCurrenciesListScreen.h" />
     <ClInclude Include="clsCurrency.h" />
+    <ClInclude Include="clsCurrencyCalculator.h" />
     <ClInclude Include="clsDate.h" />
     <ClInclude Include="clsDeleteClientScreen.h" />
     <ClInclude Include="clsDeleteUserScreen.h" />
